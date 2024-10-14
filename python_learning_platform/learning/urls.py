@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),  # Logout page
     path('courses/', views.courses, name='courses'),
     path('courses/basic-python/', views.basic_python, name='basic-python'),
+    path('courses/intermediate-python/', views.intermediate_python, name='intermediate-python'),
 ]
