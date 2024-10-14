@@ -11,4 +11,5 @@ urlpatterns = [
     path('courses/basic-python/', views.basic_python, name='basic-python'),
     path('courses/intermediate-python/', views.intermediate_python, name='intermediate-python'),
     path('courses/advanced-python/', views.advanced_python, name='advanced-python'),
-]
+    path('resources/', views.resources, name='resources'),
+    ]

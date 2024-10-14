@@ -32,15 +32,11 @@ def login_view(request):
 
 # View to list all courses
 def courses(request):
+    # Sample courses data
     courses = [
         {'title': 'Basics of Python', 'description': 'Learn the essentials of Python programming. Get ready to build your first Python program.', 'url': 'basic-python'},
-        
         {'title': 'Intermediate Python', 'description': 'Advance your Python skills with more complex concepts.', 'url': 'intermediate-python'},
-        
         {'title': 'Advanced Python', 'description': 'Dive deep into advanced Python concepts and techniques to become a Python expert.', 'url': 'advanced-python'},
-
-        
-
     ]
     return render(request, 'learning/courses.html', {'courses': courses})
 
@@ -51,9 +47,9 @@ def basic_python(request):
 def intermediate_python(request):
     return render(request, 'learning/intermediate_python.html')
 
-
 def advanced_python(request):
     return render(request, 'learning/advanced_python.html')
 
-
+def resources(request):
+    return render(request, 'learning/resources.html')
 

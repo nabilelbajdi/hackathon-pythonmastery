@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Python Resources{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/resources.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <h1 class="display-4 mb-4 text-center">Python Resources</h1>
+        <p class="lead mb-5 text-center">Enhance your Python learning journey with these carefully curated resources.</p>
+
+        <div class="resource-grid">
+            <div class="resource-card">
+                <i class="fas fa-book-open resource-icon"></i>
+                <h2 class="h3 mb-3">Official Documentation</h2>
+                <ul class="resource-list">
+                    <li>
+                        <a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer">Python Official Documentation</a>
+                        <p>The official Python documentation is an excellent resource for in-depth information about the language.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="resource-card">
+                <i class="fas fa-laptop-code resource-icon"></i>
+                <h2 class="h3 mb-3">Online Tutorials</h2>
+                <ul class="resource-list">
+                    <li>
+                        <a href="https://www.learnpython.org/" target="_blank" rel="noopener noreferrer">LearnPython.org</a>
+                        <p>Interactive Python tutorials for beginners and advanced learners.</p>
+                    </li>
+                    <li>
+                        <a href="https://www.w3schools.com/python/" target="_blank" rel="noopener noreferrer">W3Schools Python Tutorial</a>
+                        <p>Comprehensive Python tutorial with examples and exercises.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="resource-card">
+                <i class="fas fa-book resource-icon"></i>
+                <h2 class="h3 mb-3">Books</h2>
+                <ul class="resource-list">
+                    <li>
+                        <a href="https://automatetheboringstuff.com/" target="_blank" rel="noopener noreferrer">Automate the Boring Stuff with Python</a>
+                        <p>A practical programming guide for beginners, available online for free.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
