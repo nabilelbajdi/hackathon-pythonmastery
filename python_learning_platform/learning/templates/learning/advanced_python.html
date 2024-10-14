@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block title %}Advanced Python{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <h1 class="display-4 mb-4">Advanced Python</h1>
+        <p class="lead">Welcome to the Advanced Python tutorial! This comprehensive guide will dive deep into advanced Python concepts and techniques to help you become a Python expert.</p>
+
+        <nav id="tutorial-nav" class="navbar navbar-light bg-light mb-4">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link" href="#decorators">Decorators</a></li>
+                <li class="nav-item"><a class="nav-link" href="#metaclasses">Metaclasses</a></li>
+                <li class="nav-item"><a class="nav-link" href="#context-managers">Context Managers</a></li>
+                <li class="nav-item"><a class="nav-link" href="#asyncio">Asyncio</a></li>
+            </ul>
+        </nav>
+
+        <section id="decorators" class="mb-5">
+            <h2 class="h3 mb-3">Decorators</h2>
+            <p>Decorators are a powerful way to modify or enhance functions and classes without directly changing their source code.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+import functools
+
+def timer(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        import time
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"{func.__name__} ran in {end_time - start_time:.2f} seconds")
+        return result
+    return wrapper
+
+@timer
+def slow_function():
+    import time
+    time.sleep(2)
+    print("Function executed")
+
+slow_function()
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('decorators')">Run Code</button>
+            <div id="decorators-output" class="mt-2"></div>
+        </section>
+
+        <section id="metaclasses" class="mb-5">
+            <h2 class="h3 mb-3">Metaclasses</h2>
+            <p>Metaclasses are classes for classes. They define how classes behave and can be used to implement powerful patterns.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+class SingletonMeta(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class Singleton(metaclass=SingletonMeta):
+    def __init__(self):
+        self.value = None
+
+    def set_value(self, value):
+        self.value = value
+
+# Usage
+s1 = Singleton()
+s2 = Singleton()
+
+s1.set_value(42)
+print(s2.value)  # Output: 42
+print(s1 is s2)  # Output: True
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('metaclasses')">Run Code</button>
+            <div id="metaclasses-output" class="mt-2"></div>
+        </section>
+
+        <section id="context-managers" class="mb-5">
+            <h2 class="h3 mb-3">Context Managers</h2>
+            <p>Context managers provide a clean way to manage resources, ensuring proper setup and teardown.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+class CustomOpen:
+    def __init__(self, filename, mode):
+        self.filename = filename
+        self.mode = mode
+        self.file = None
+
+    def __enter__(self):
+        self.file = open(self.filename, self.mode)
+        return self.file
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.file:
+            self.file.close()
+        if exc_type is not None:
+            print(f"An error occurred: {exc_val}")
+        return True
+
+# Usage
+with CustomOpen('example.txt', 'w') as f:
+    f.write('Hello, Context Managers!')
+
+with CustomOpen('example.txt', 'r') as f:
+    content = f.read()
+    print(content)
+
+# Demonstrating error handling
+with CustomOpen('example.txt', 'r') as f:
+    raise ValueError("Demonstrating error handling")
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('context-managers')">Run Code</button>
+            <div id="context-managers-output" class="mt-2"></div>
+        </section>
+
+        <section id="asyncio" class="mb-5">
+            <h2 class="h3 mb-3">Asyncio</h2>
+            <p>Asyncio is a library for writing concurrent code using the async/await syntax. It's particularly useful for I/O-bound and high-level structured network code.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+import asyncio
+import aiohttp
+
+async def fetch_url(session, url):
+    async with session.get(url) as response:
+        return await response.text()
+
+async def main():
+    urls = [
+        'https://api.github.com',
+        'https://api.github.com/events',
+        'https://api.github.com/repos/python/cpython',
+    ]
+    
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_url(session, url) for url in urls]
+        responses = await asyncio.gather(*tasks)
+        
+        for url, response in zip(urls, responses):
+            print(f"URL: {url}\nLength: {len(response)} characters\n")
+
+asyncio.run(main())
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('asyncio')">Run Code</button>
+            <div id="asyncio-output" class="mt-2"></div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+
+    function runCode(sectionId) {
+        // This is a placeholder. In a real implementation, you'd send the code to a backend for execution.
+        const output = document.getElementById(`${sectionId}-output`);
+        output.innerHTML = `<div class="alert alert-info">Code execution simulation for ${sectionId}. In a real scenario, this would show the actual output of the Python code.</div>`;
+    }
+
+    // Smooth scrolling for in-page links
+    document.querySelectorAll('#tutorial-nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<style>
+    .code-block {
+        margin-bottom: 1rem;
+    }
+    pre {
+        margin-bottom: 0;
+    }
+    #tutorial-nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+</style>
+{% endblock %}
