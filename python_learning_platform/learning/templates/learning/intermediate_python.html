@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Intermediate Python{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <h1 class="display-4 mb-4">Intermediate Python</h1>
+        <p class="lead">Welcome to the Intermediate Python tutorial! This comprehensive guide will introduce you to more advanced concepts in Python programming.</p>
+
+        <nav id="tutorial-nav" class="navbar navbar-light bg-light mb-4">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link" href="#list-comprehensions">List Comprehensions</a></li>
+                <li class="nav-item"><a class="nav-link" href="#lambda-functions">Lambda Functions</a></li>
+                <li class="nav-item"><a class="nav-link" href="#decorators">Decorators</a></li>
+                <li class="nav-item"><a class="nav-link" href="#generators">Generators</a></li>
+            </ul>
+        </nav>
+
+        <section id="list-comprehensions" class="mb-5">
+            <h2 class="h3 mb-3">List Comprehensions</h2>
+            <p>List comprehensions provide a concise way to create lists based on existing lists or other iterable objects.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+# Basic list comprehension
+numbers = [1, 2, 3, 4, 5]
+squares = [x**2 for x in numbers]
+print(f"Squares: {squares}")
+
+# List comprehension with condition
+even_squares = [x**2 for x in numbers if x % 2 == 0]
+print(f"Even squares: {even_squares}")
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('list-comprehensions')">Run Code</button>
+            <div id="list-comprehensions-output" class="mt-2"></div>
+        </section>
+
+        <section id="lambda-functions" class="mb-5">
+            <h2 class="h3 mb-3">Lambda Functions</h2>
+            <p>Lambda functions are small anonymous functions that can have any number of arguments but can only have one expression.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+# Lambda function
+multiply = lambda x, y: x * y
+print(f"4 * 5 = {multiply(4, 5)}")
+
+# Lambda with map()
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x**2, numbers))
+print(f"Squared numbers: {squared}")
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('lambda-functions')">Run Code</button>
+            <div id="lambda-functions-output" class="mt-2"></div>
+        </section>
+
+        <section id="decorators" class="mb-5">
+            <h2 class="h3 mb-3">Decorators</h2>
+            <p>Decorators provide a way to modify functions using other functions.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+def uppercase_decorator(function):
+    def wrapper():
+        result = function()
+        return result.upper()
+    return wrapper
+
+@uppercase_decorator
+def greet():
+    return "hello, world!"
+
+print(greet())
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('decorators')">Run Code</button>
+            <div id="decorators-output" class="mt-2"></div>
+        </section>
+
+        <section id="generators" class="mb-5">
+            <h2 class="h3 mb-3">Generators</h2>
+            <p>Generators are functions that return an iterator that produces a sequence of values when iterated over.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+fib = fibonacci(10)
+print(list(fib))
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('generators')">Run Code</button>
+            <div id="generators-output" class="mt-2"></div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+
+    function runCode(sectionId) {
+        // This is a placeholder. In a real implementation, you'd send the code to a backend for execution.
+        const output = document.getElementById(`${sectionId}-output`);
+        output.innerHTML = `<div class="alert alert-info">Code execution simulation for ${sectionId}. In a real scenario, this would show the actual output of the Python code.</div>`;
+    }
+
+    // Smooth scrolling for in-page links
+    document.querySelectorAll('#tutorial-nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<style>
+    .code-block {
+        margin-bottom: 1rem;
+    }
+    pre {
+        margin-bottom: 0;
+    }
+    #tutorial-nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+</style>
+{% endblock %}
