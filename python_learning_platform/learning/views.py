@@ -40,4 +40,14 @@ def courses(request):
 
 # View for each individual course page
 def basic_python(request):
+<<<<<<< Updated upstream
     return render(request, 'learning/basic_python.html')
+=======
+    return render(request, 'learning/basic_python.html')
+
+def advanced_python(request):
+    return render(request, 'learning/advanced_python.html')
+
+def resources(request):
+    return render(request, 'learning/resources.html')
+>>>>>>> Stashed changes

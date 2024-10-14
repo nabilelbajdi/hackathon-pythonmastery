@@ -9,4 +9,9 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),  # Logout page
     path('courses/', views.courses, name='courses'),
     path('courses/basic-python/', views.basic_python, name='basic-python'),
+<<<<<<< Updated upstream
+=======
+    path('courses/advanced-python/', views.advanced_python, name='advanced-python'),
+    path('resources/', views.resources, name='resources'),
+>>>>>>> Stashed changes
 ]
