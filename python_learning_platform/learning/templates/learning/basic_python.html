@@ -4,16 +4,168 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        <h1 class="h2 mb-4">Basics of Python</h1>
-        <p>Welcome to the Python Basics tutorial! Here you will learn the essentials of Python programming, including:</p>
-        <ul>
-            <li>Variables and Data Types</li>
-            <li>Control Structures (if statements, loops)</li>
-            <li>Functions</li>
-            <li>Basic Data Structures (lists, dictionaries)</li>
-        </ul>
-        <p>Start practicing these concepts and build a strong foundation in Python!</p>
+    <div class="col-md-10">
+        <h1 class="display-4 mb-4">Basics of Python</h1>
+        <p class="lead">Welcome to the Python Basics tutorial! This comprehensive guide will introduce you to the fundamental concepts of Python programming.</p>
+
+        <nav id="tutorial-nav" class="navbar navbar-light bg-light mb-4">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link" href="#variables">Variables</a></li>
+                <li class="nav-item"><a class="nav-link" href="#control-structures">Control Structures</a></li>
+                <li class="nav-item"><a class="nav-link" href="#functions">Functions</a></li>
+                <li class="nav-item"><a class="nav-link" href="#data-structures">Data Structures</a></li>
+            </ul>
+        </nav>
+
+        <section id="variables" class="mb-5">
+            <h2 class="h3 mb-3">Variables and Data Types</h2>
+            <p>In Python, variables are used to store data. Python is dynamically typed, which means you don't need to declare the type of a variable.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+# Integer
+age = 25
+
+# Float
+height = 1.75
+
+# String
+name = "Alice"
+
+# Boolean
+is_student = True
+
+print(f"{name} is {age} years old and {height}m tall.")
+print(f"Student status: {is_student}")
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('variables')">Run Code</button>
+            <div id="variables-output" class="mt-2"></div>
+        </section>
+
+        <section id="control-structures" class="mb-5">
+            <h2 class="h3 mb-3">Control Structures</h2>
+            <p>Control structures allow you to control the flow of your program.</p>
+            <h3 class="h4 mt-4">If Statements</h3>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+age = 20
+
+if age < 18:
+    print("You are a minor.")
+elif age >= 18 and age < 65:
+    print("You are an adult.")
+else:
+    print("You are a senior citizen.")
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('if-statement')">Run Code</button>
+            <div id="if-statement-output" class="mt-2"></div>
+
+            <h3 class="h4 mt-4">Loops</h3>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+# For loop
+for i in range(5):
+    print(f"Iteration {i}")
+
+# While loop
+count = 0
+while count < 3:
+    print(f"Count is {count}")
+    count += 1
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('loops')">Run Code</button>
+            <div id="loops-output" class="mt-2"></div>
+        </section>
+
+        <section id="functions" class="mb-5">
+            <h2 class="h3 mb-3">Functions</h2>
+            <p>Functions allow you to group code that performs a specific task.</p>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+def greet(name):
+    return f"Hello, {name}!"
+
+def add(a, b):
+    return a + b
+
+print(greet("World"))
+print(f"2 + 3 = {add(2, 3)}")
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('functions')">Run Code</button>
+            <div id="functions-output" class="mt-2"></div>
+        </section>
+
+        <section id="data-structures" class="mb-5">
+            <h2 class="h3 mb-3">Basic Data Structures</h2>
+            <h3 class="h4 mt-4">Lists</h3>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+fruits = ["apple", "banana", "cherry"]
+print(fruits)
+fruits.append("date")
+print(fruits)
+print(f"First fruit: {fruits[0]}")
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('lists')">Run Code</button>
+            <div id="lists-output" class="mt-2"></div>
+
+            <h3 class="h4 mt-4">Dictionaries</h3>
+            <div class="code-block bg-light p-3 rounded">
+                <pre><code class="python">
+person = {"name": "Alice", "age": 30, "city": "New York"}
+print(person)
+person["job"] = "Developer"
+print(person)
+print(f"Name: {person['name']}")
+                </code></pre>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="runCode('dictionaries')">Run Code</button>
+            <div id="dictionaries-output" class="mt-2"></div>
+        </section>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+
+    function runCode(sectionId) {
+        // This is a placeholder. In a real implementation, you'd send the code to a backend for execution.
+        const output = document.getElementById(`${sectionId}-output`);
+        output.innerHTML = `<div class="alert alert-info">Code execution simulation for ${sectionId}. In a real scenario, this would show the actual output of the Python code.</div>`;
+    }
+
+    // Smooth scrolling for in-page links
+    document.querySelectorAll('#tutorial-nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<style>
+    .code-block {
+        margin-bottom: 1rem;
+    }
+    pre {
+        margin-bottom: 0;
+    }
+    #tutorial-nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+</style>
 {% endblock %}
