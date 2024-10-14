@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}PythonMastery: Your Journey to Python Excellence Starts Here{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center fade-in">
+    <div class="col-md-10 text-center">
+        <h1 class="display-4 mb-4">Welcome to PythonMastery</h1>
+        <p class="lead mb-5">Embark on your Python journey with our comprehensive, interactive learning platform. From beginners to advanced developers, we've got you covered.</p>
+        
+        {% if user.is_authenticated %}
+            <h2 class="h3 mb-4">Welcome, {{ user.username }}!</h2>
+            <p>We're excited to have you here. Ready to enhance your Python skills?</p>
+            <a href="{% url 'courses' %}" class="btn btn-primary btn-lg mt-3">Explore Lessons</a>
+        {% else %}
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card shadow mb-4" style="border-radius: var(--border-radius);">
+                        <div class="card-body">
+                            <h2 class="h4 mb-3">New to PythonMastery?</h2>
+                            <p>Join our community and start your Python journey today!</p>
+                            <a href="{% url 'signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card shadow mb-4" style="border-radius: var(--border-radius);">
+                        <div class="card-body">
+                            <h2 class="h4 mb-3">Already a member?</h2>
+                            <p>Welcome back! Log in to continue your learning.</p>
+                            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">Log In</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
