@@ -1,4 +1,16 @@
+:root {
+    --primary-color: #dbb734;
+    --secondary-color: #b09000;
+    --accent-color: #b09000;
+    --background-color: #292929;
+    --text-color: #fbfbfb;
+    --card-background: #323130;
+    --light-color: #393737;
+    --footer-color: #393737; 
+}
+
 .resource-grid {
+
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
@@ -6,7 +18,7 @@
 }
 
 .resource-card {
-    background-color: #ffffff;
+    background-color: var(--light-color);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2rem;
